@@ -5,16 +5,31 @@
  * @format
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import {
+  StatusBar,
+  StyleSheet,
+  useColorScheme,
+  View,
+  Text,
+} from 'react-native';
+import React, {useEffect} from 'react';
+import {SqliteClient} from "./SQLiteClient.ts";
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
+    useEffect(() => {
+        SqliteClient.openDB();
+    }, []);
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>
+            ✨OP-SQLite JSI Error Reproduction ✨
+        </Text>
+      </View>
     </View>
   );
 }
